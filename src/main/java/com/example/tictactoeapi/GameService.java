@@ -9,7 +9,6 @@ public class GameService {
 	long countO;
 	long countSpaces;
 	
-	
 	public Boolean isBoardValid(String board){
 		countX = board.chars().filter(num -> num == 'x').count();
 		countO = board.chars().filter(num -> num == 'o').count();
@@ -39,7 +38,7 @@ public class GameService {
 	}
 	
 	private Boolean validGameBeingPlayed(String board){
-		if (countX == countO || countX == countO+1){
+		if (countO + countX < 9 && (countX == countO || countX == countO+1)){
 			return true;
 		}
 		return false;
