@@ -5,16 +5,17 @@ import org.springframework.stereotype.Component;
 @Component
 public class GameService {
 	
+	long countX;
+	long countO;
+	long countSpaces;
+	
+	
 	public Boolean isBoardValid(String board){
-		if(board.length() > 0 && board.length() != 9){
-			return false;
-		}
-		long countX = board.chars().filter(num -> num == 'x').count();
-		long countO = board.chars().filter(num -> num == 'o').count();
-		long countSpace = board.chars().filter(num -> num == ' ').count();
+		countX = board.chars().filter(num -> num == 'x').count();
+		countO = board.chars().filter(num -> num == 'o').count();
+		countSpaces = board.chars().filter(num -> num == ' ').count();
 		
-		long totalCount = countX+countO+countSpace;
-		if(totalCount == 0 ||(countSpace > 0 && (countX == countO || countX == countO +1)) ){
+		if(correctSizeAndCharacters(board) && validGameBeingPlayed(board)){
 			return true;
 		}
 		return false;
@@ -24,10 +25,24 @@ public class GameService {
 		int space = board.indexOf(' ');
 		StringBuilder updatedBoard = new StringBuilder(board);
 		if(space > -1){
-			updatedBoard .setCharAt(space, 'o');
+			updatedBoard.setCharAt(space, 'o');
 		 return updatedBoard.toString();
+		} 
+		return board + "o";
+	}
+	
+	private Boolean correctSizeAndCharacters(String board){
+		if(board.length() <= 9 && board.length() == countX+countO+countSpaces){
+			return true;
 		}
-		return "    o    ";
+		return false;
+	}
+	
+	private Boolean validGameBeingPlayed(String board){
+		if (countX == countO || countX == countO+1){
+			return true;
+		}
+		return false;
 	}
 	
 }
