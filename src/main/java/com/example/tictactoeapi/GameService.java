@@ -56,7 +56,7 @@ public class GameService {
 	}
 
 	private Boolean correctSizeAndCharacterTypes(String board) {
-		if (board.length() <= 9 && board.length() == countX + countO + countSpaces) {
+		if (board.length() == 9 && board.length() == countX + countO + countSpaces) {
 			return true;
 		}
 		return false;
