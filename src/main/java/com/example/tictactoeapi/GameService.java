@@ -28,7 +28,7 @@ public class GameService {
 			}
 		}
 		// 3 down
-		for (int i = 0; i < 3; i = i++) {
+		for (int i = 0; i < 3; i++) {
 			if (board.charAt(i) == (board.charAt(i + 3)) && board.charAt(i + 3) == (board.charAt(i + 6))) {
 				return false;
 			}
